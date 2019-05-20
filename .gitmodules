@@ -1,0 +1,3 @@
+[submodule "tky/animeface-2009/animeface-2009"]
+	path = tky/animeface-2009/animeface-2009
+	url = https://github.com/nagadomi/animeface-2009
