@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Face Detection Example</title>
+<style>
+                .canvas-box{ width: 1000px; height: 800px; position: relative;-webkit-user-select:none;-moz-user-select:none;-o-user-select:none;user-select:none }
+                .canvas-box .overlay{ position: absolute; left: 0; top: 0; cursor: move;border:1px solid #69f;}
+                .canvas-box div,.canvas-box canvas{-webkit-user-select:none;-moz-user-select:none;-o-user-select:none;user-select:none}
+</style>
+<link href="/static/css/js_example_style.css" rel="stylesheet" type="text/css" />
+<script src="/static/js/jquery.min.js"></script>
+
+</head>
+<body>
+<h2>Face Detection Example</h2>
+<p>
+    &lt;canvas&gt; elements named <b>canvasInput</b> and <b>canvasOutput</b> have been prepared.<br>
+    Click <b>Try it</b> button to see the result. You can choose another image.<br>
+    You can change the code in the &lt;textarea&gt; to investigate more.
+</p>
+<div>
+<div class="control"><button id="tryIt" disabled>Try it</button></div>
+<p class="err" id="errorMessage"></p>
+</div>
+<div>
+    <table cellpadding="0" cellspacing="0" width="0" border="0">
+    <tr>
+        <td>
+            <canvas id="canvasInput"></canvas>
+        </td>
+        <td>
+            <canvas id="canvasOutput"></canvas>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="caption">canvasInput <input type="file" id="fileInput" name="file" accept="image/*" /></div>
+        </td>
+        <td>
+            <div class="caption">canvasOutput</div>
+        </td>
+    </tr>
+    </table>
+</div>
+
+
+	<br>
+	<div class="canvas-box">
+
+	</div>
+	<br>
+	<br>
+	<input type="button" id="save" value="保存">
+
+
+
+<script src="/static/js/zm-canvas-crop.js"></script>
+
+
+<script type="text/javascript">
+		function saveCallBack(base64) {
+			//最终把此base64传给后端
+			$.post("/submitPic",{
+			data:base64
+		});
+		}
+
+		var c = new ZmCanvasCrop({
+						fileInput: $('#fileInput')[0],  
+						saveBtn: $('#save')[0],
+						box_width: 1000,  //剪裁容器的最大宽度
+						box_height: 800, //剪裁容器的最大高度
+						min_width: 10,  //要剪裁图片的最小宽度
+						min_height: 10  //要剪裁图片的最小高度
+					}, saveCallBack);
+</script>
+<script src="/static/js/utils.js" type="text/javascript"></script>
+<script id="codeSnippet" type="text/code-snippet">
+let src = cv.imread('canvasInput');
+let gray = new cv.Mat();
+cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
+let faces = new cv.RectVector();
+let faceCascade = new cv.CascadeClassifier();
+// load pre-trained classifiers
+console.log("1");
+faceCascade.load('lbpcascade_animeface.xml');
+console.log("2");
+// detect faces
+let msize = new cv.Size(0, 0);
+faceCascade.detectMultiScale(gray, faces, 1.1, 3, 0, msize, msize);
+console.log("3");
+for (let i = 0; i < faces.size(); ++i) {
+    let roiGray = gray.roi(faces.get(i));
+    let roiSrc = src.roi(faces.get(i));
+    let point1 = new cv.Point(faces.get(i).x, faces.get(i).y);
+    let point2 = new cv.Point(faces.get(i).x + faces.get(i).width,
+                              faces.get(i).y + faces.get(i).height);
+    cv.rectangle(src, point1, point2, [255, 0, 0, 255]);
+    // detect eyes in face ROI
+    
+    roiGray.delete(); roiSrc.delete();
+}
+cv.imshow('canvasOutput', src);
+src.delete(); gray.delete(); faceCascade.delete();
+faces.delete();
+</script>
+<script type="text/javascript">
+let utils = new Utils('errorMessage');
+utils.addFileInputHandler('fileInput', 'canvasInput');
+
+let tryIt = document.getElementById('tryIt');
+tryIt.addEventListener('click', () => {
+    let code = document.getElementById("codeSnippet").firstChild.data;
+    console.log("31");
+    console.log(code);
+    eval(code);
+    console.log("done");
+});
+
+utils.loadOpenCv(() => {
+        let faceCascadeFile = '/static/data/lbpcascade_animeface.xml';
+	let faceCascadePath = 'lbpcascade_animeface.xml';
+        utils.createFileFromUrl(faceCascadePath, faceCascadeFile, () => {
+            tryIt.removeAttribute('disabled');
+	    console.log("111");
+            alert("初始化完毕");
+        });
+
+   
+});
+</script>
+</body>
+</html>
