@@ -14,8 +14,6 @@
 </p>
 <div>
 <div class="control"><button id="tryIt" disabled>Try it</button></div>
-<textarea class="code" rows="9" cols="100" id="codeEditor" spellcheck="false">
-</textarea>
 <p class="err" id="errorMessage"></p>
 </div>
 <div>
@@ -70,13 +68,15 @@ faces.delete();
 </script>
 <script type="text/javascript">
 let utils = new Utils('errorMessage');
-
-utils.loadCode('codeSnippet', 'codeEditor');
 utils.addFileInputHandler('fileInput', 'canvasInput');
 
 let tryIt = document.getElementById('tryIt');
 tryIt.addEventListener('click', () => {
-    utils.executeCode('codeEditor');
+    let code = document.getElementById("codeSnippet").firstChild.data;
+    console.log("31");
+    console.log(code);
+    eval(code);
+    console.log("done");
 });
 
 utils.loadOpenCv(() => {
@@ -84,8 +84,10 @@ utils.loadOpenCv(() => {
 	let faceCascadePath = 'lbpcascade_animeface.xml';
         utils.createFileFromUrl(faceCascadePath, faceCascadeFile, () => {
             tryIt.removeAttribute('disabled');
-	    console.log("111")
+	    console.log("111");
+            alert("初始化完毕");
         });
+
    
 });
 </script>
