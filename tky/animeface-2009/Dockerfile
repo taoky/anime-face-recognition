@@ -5,5 +5,7 @@ RUN apt-get update
 RUN apt-get install -y libmagickwand-dev build-essential ruby-dev && gem install rmagick
 
 COPY animeface-2009/ /animeface-2009/
+WORKDIR /animeface-2009/
+RUN ./build.sh
 
 RUN bash
