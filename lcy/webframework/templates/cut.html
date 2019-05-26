@@ -1,17 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>zimu canvas crop</title>
-	
+
 	<script src="jquery.min.js"></script>
 
 	<style>
-		.canvas-box{ width: 300px; height: 200px; position: relative;-webkit-user-select:none;-moz-user-select:none;-o-user-select:none;user-select:none }
-		.canvas-box .overlay{ position: absolute; left: 0; top: 0; cursor: move;border:1px solid #69f;}
-		.canvas-box div,.canvas-box canvas{-webkit-user-select:none;-moz-user-select:none;-o-user-select:none;user-select:none}
+		.canvas-box {
+			width: 300px;
+			height: 200px;
+			position: relative;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-o-user-select: none;
+			user-select: none
+		}
+
+		.canvas-box .overlay {
+			position: absolute;
+			left: 0;
+			top: 0;
+			cursor: move;
+			border: 1px solid #69f;
+		}
+
+		.canvas-box div,
+		.canvas-box canvas {
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-o-user-select: none;
+			user-select: none
+		}
 	</style>
 </head>
+
 <body>
 	<input type="file" value="select img" id="ipt" value="选择图片">
 
@@ -37,32 +61,33 @@
 
 	<div id="base64"></div>
 </body>
-	<script src="zm-canvas-crop.js"></script>
-	<script type="text/javascript">
-		function saveCallBack(base64) {
-			$('#base64').html(base64);  
-			//最终把此base64传给后端
-			
-			$.ajax({
-				data: {
-					base64: base64
-				} 
-			});
-			
-			$.post("https://www.baidu.com",{
-			data:base64
-		});
-		}
+<script src="zm-canvas-crop.js"></script>
+<script type="text/javascript">
+	function saveCallBack(base64) {
+		$('#base64').html(base64);
+		//最终把此base64传给后端
 
-		var c = new ZmCanvasCrop({
-						fileInput: $('#ipt')[0],  
-						saveBtn: $('#save')[0],
-						box_width: 1000,  //剪裁容器的最大宽度
-						box_height: 800, //剪裁容器的最大高度
-						min_width: 150,  //要剪裁图片的最小宽度
-						min_height: 150  //要剪裁图片的最小高度
-					}, saveCallBack);
-		
-		
-	</script>
+		$.ajax({
+			data: {
+				base64: base64
+			}
+		});
+
+		$.post("https://www.baidu.com", {
+			data: base64
+		});
+	}
+
+	var c = new ZmCanvasCrop({
+		fileInput: $('#ipt')[0],
+		saveBtn: $('#save')[0],
+		box_width: 1000,  //剪裁容器的最大宽度
+		box_height: 800, //剪裁容器的最大高度
+		min_width: 150,  //要剪裁图片的最小宽度
+		min_height: 150  //要剪裁图片的最小高度
+	}, saveCallBack);
+
+
+</script>
+
 </html>

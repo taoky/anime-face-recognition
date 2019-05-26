@@ -68,3 +68,29 @@ button[disabled] {
 .small {
     max-width: 300px;
 }
+
+.canvas-box {
+    /* width: 300px;
+    height: 200px; */
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none
+}
+
+.canvas-box .overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    cursor: move;
+    border: 1px solid #69f;
+}
+
+.canvas-box div,
+.canvas-box canvas {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none
+}
