@@ -87,15 +87,6 @@ function Utils(errorOutputId) { // eslint-disable-line no-unused-vars
         this.errorOutput.innerHTML = err;
     };
 
-    this.loadCode = function(scriptId, textAreaId) {
-        let scriptNode = document.getElementById(scriptId);
-        let textArea = document.getElementById(textAreaId);
-        if (scriptNode.type !== 'text/code-snippet') {
-            throw Error('Unknown code snippet type');
-        }
-        textArea.value = scriptNode.text.replace(/^\n/, '');
-    };
-
     this.addFileInputHandler = function(fileInputId, canvasId) {
         let inputElement = document.getElementById(fileInputId);
         inputElement.addEventListener('change', (e) => {
@@ -106,6 +97,4 @@ function Utils(errorOutputId) { // eslint-disable-line no-unused-vars
             }
         }, false);
     };
-
-    
 };

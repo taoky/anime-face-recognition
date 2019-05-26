@@ -12,7 +12,7 @@ app = Flask(__name__)
 # fd == facedetect
 @app.route("/")
 def index():
-    return render_template("js_face_detection.html")
+    return render_template("index.html")
 
 
 @app.route("/submitPic", methods=['GET', 'POST'])
