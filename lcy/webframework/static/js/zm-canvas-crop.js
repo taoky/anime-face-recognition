@@ -375,7 +375,7 @@ ZmCanvasCrop.prototype = {
 	save: function(){
 		this.parseInt();//取整，避免出现杂边线条
 		var self = this;
-		var $result = $("<canvas width='"+ self._save.width +"' height='"+ self._save.height +"'></canvas>");
+		var $result = $("<canvas class='result_pic' width='"+ self._save.width +"' height='"+ self._save.height +"'></canvas><button class='delete_button'>删除此项</button>");
 		$('body').append($result);
 		$result[0].getContext('2d').drawImage(self._img, 
 			self._save.left, self._save.top, self._save.width, self._save.height,
@@ -384,7 +384,7 @@ ZmCanvasCrop.prototype = {
 
 		var base64Url = $result[0].toDataURL('image/jpeg');
 
-		saveCallBack && saveCallBack(base64Url);
+		// saveCallBack && saveCallBack(base64Url);
 
 		return base64Url;
 	},

@@ -49,7 +49,7 @@
     
     <input type="button" id="addToList" value="加入列表">
 
-    <input type="button" id="save" value="上传至服务器分析">
+    <input type="button" id="upload" value="上传至服务器分析">
 
     <p id="result"></p>
 
@@ -59,7 +59,7 @@
         statusText = document.getElementById("status")
         resultText = document.getElementById("result")
 
-        function saveCallBack(base64) {
+        function test(base64) {
             //最终把此base64传给后端
             $.post("/submitPic", {
                 data: base64
@@ -72,18 +72,18 @@
             });
         }
 
-        function addToList() {
-            // ...
+        function saveCallBack(_) {
+            // make this js library happy
         }
 
         var c = new ZmCanvasCrop({
             fileInput: $('#fileInput')[0],
-            saveBtn: $('#save')[0],
+            saveBtn: $('#addToList')[0],
             box_width: 800,  //剪裁容器的最大宽度
             box_height: 800, //剪裁容器的最大高度
             min_width: 10,  //要剪裁图片的最小宽度
             min_height: 10  //要剪裁图片的最小高度
-        }, addToList);
+        });
     </script>
     <script src="/static/js/utils.js" type="text/javascript"></script>
     <script src="/static/js/user.js" type="text/javascript"></script>
