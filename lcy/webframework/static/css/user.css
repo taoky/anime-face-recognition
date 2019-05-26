@@ -94,3 +94,7 @@ button[disabled] {
     -o-user-select: none;
     user-select: none
 }
+
+#image_canvas {
+    max-width: 800px;
+}
