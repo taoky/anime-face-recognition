@@ -11,4 +11,4 @@
 - zyt: 深度学习算法
 
   阅读 tensorflow（或者 pytorch）tutorial 中图像分类（重训练）的代码，理解算法。
-- fjw: TBD
+- fjw: 帮 lcy 干活
