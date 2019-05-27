@@ -83,5 +83,6 @@ def web_api(file_name):
   labels = load_labels(label_file)
   ret = ""
   for i in top_k:
+    print(labels[i], results[i])
     ret += str((labels[i], results[i]))
   return ret

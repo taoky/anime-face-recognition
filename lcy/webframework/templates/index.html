@@ -55,7 +55,7 @@
                 $.post("/uploadForIdent", {
                     data: upload_list[i].toDataURL('image/png')
                 }, (data, status) => {
-                    let resultText = upload_list[i].nextElementSibling.nextElementSibling
+                    let resultText = upload_list[i].nextElementSibling.nextElementSibling.nextElementSibling
                     if (status == "success") {
                         resultText.innerText = data
                     } else {
