@@ -27,7 +27,7 @@ function facedet() {
 
 function addToList(x, y, width, height, src_canvas) {
     var result = $("<canvas class='result_pic' width='" + width + "' height='" + height + 
-                    "'></canvas><button class='delete_button'>删除此项</button><button class='report_button'>结果不对？</button><p class='result'></p>");
+                    "'></canvas><button class='delete_button btn btn-danger'>删除此项</button><button class='report_button btn btn-info'>结果不对？</button><p class='result'></p>");
     $('#mylist').append(result);
     console.log(result)
     result[0].getContext('2d').drawImage(src_canvas,
@@ -46,15 +46,17 @@ function addToList(x, y, width, height, src_canvas) {
     result[2].addEventListener('click', () => {
         let img_canvas = result[0];
         let name = window.prompt("report...");
-        $.post("/report", {
-            data: img_canvas.toDataURL('image/png'),
-            real_name: name
-        }, (data, status) => {
-            if (status == "success") {
-                alert("Success!")
-            } else {
-                alert("Error!")
-            }
-        });
+        if (name != null) {
+            $.post("/report", {
+                data: img_canvas.toDataURL('image/png'),
+                real_name: name
+            }, (data, status) => {
+                if (status == "success") {
+                    alert("Success!")
+                } else {
+                    alert("Error!")
+                }
+            });
+        }
     })
 }
