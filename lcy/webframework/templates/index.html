@@ -3,44 +3,25 @@
 
 <head>
     <meta charset="utf-8">
-    <title>动漫人物识别</title>
+    <title>动漫人物识别 Demo</title>
     <link href="/static/css/user.css" rel="stylesheet" type="text/css" />
     <script src="/static/js/jquery.min.js"></script>
 
 </head>
 
 <body>
-    <h2>动漫人物识别</h2>
+    <h2>动漫人物识别 Demo</h2>
     <p id="status">
         正在初始化……
     </p>
     <div>
         <div class="control"><button id="tryIt" disabled>自动识别</button></div>
         <p class="err" id="errorMessage"></p>
+        <input type="file" id="fileInput" name="file" accept="image/*" />
+        <canvas class="image_canvas" id="canvasInput" hidden></canvas>
+        <!-- <canvas class="image_canvas" id="canvasOutput"></canvas> -->
     </div>
-    <div>
-        <table cellpadding="0" cellspacing="0" width="0" border="0">
-            <tr>
-                <td>
-                    <canvas class="image_canvas" id="canvasInput" hidden></canvas>
-                </td>
-                <td>
-                    <canvas class="image_canvas" id="canvasOutput"></canvas>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="caption"><input type="file" id="fileInput" name="file" accept="image/*" />
-                    </div>
-                </td>
-                <td>
-                    <div class="caption">canvasOutput</div>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-
+    
     <br>
     <h3>没有检测到？你可以手动框选加入。</h3>
     <div class="canvas-box">

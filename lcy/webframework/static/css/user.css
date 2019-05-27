@@ -1,9 +1,9 @@
 body, div, p {
     font: 400 14px/22px Roboto,sans-serif;
 }
-canvas, img, video {
+/* canvas, img, video {
     border: 1px solid black;
-}
+} */
 td {
     padding: 10px 0px 0px 10px;
     text-align: center;
@@ -95,6 +95,6 @@ button[disabled] {
     user-select: none
 }
 
-#image_canvas {
+/* #image_canvas {
     max-width: 800px;
-}
+} */
