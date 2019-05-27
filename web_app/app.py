@@ -5,6 +5,7 @@ from datetime import datetime
 import base64
 from random import randint
 from classification import web_api
+from werkzeug.utils import secure_filename
 
 IDENT_DIR = os.path.dirname(os.path.abspath(__file__)) + '/ident/'
 REPORT_DIR = os.path.dirname(os.path.abspath(__file__)) + '/user_report/'
@@ -21,7 +22,7 @@ def receive_img(request, target_dir, desired_filename=None):
     if not desired_filename:
         file_name = target_dir + str(datetime.now())[:10] + str(randint(0,100)) + ".png"
     else:
-        file_name = target_dir + desired_filename + "-" + str(datetime.now())[:10] + str(randint(0,100)) + ".png"
+        file_name = target_dir + secure_filename(desired_filename) + "-" + str(datetime.now())[:10] + str(randint(0,100)) + ".png"
     with open(file_name, "wb") as f:
         f.write(base64.urlsafe_b64decode(
             pic.encode("utf-8")
