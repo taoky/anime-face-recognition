@@ -9,3 +9,7 @@ output_graph.pb
 
 # Python
 *.pyc
+
+# Test file of web_app
+web_app/ident/*
+web_app/user_report/*
