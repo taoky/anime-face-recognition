@@ -27,7 +27,7 @@ function facedet() {
 
 function addToList(x, y, width, height, src_canvas) {
     let result = $("<div class=\"container-fluid\"><div class='row'><div class='col-md-4'><canvas class='result_pic' width='" + width + "' height='" + height + 
-                    "'></canvas></div><div class='col-md-4 align-self-center'><div class='btn-group' role='group' aria-label='Basic example'><button class='delete_button btn btn-danger'>删除此项</button><button class='report_button btn btn-info'>结果不对？</button></div></div><p class='result col-md-4 align-self-center'></p></div></div>");
+                    "'></canvas></div><div class='col-md-4 align-self-center'><div class='btn-group' role='group' aria-label='Basic example'><button class='delete_button btn btn-danger'>删除此项</button><button class='report_button btn btn-info'>结果不对？</button></div></div><p class='result col-md-4 align-self-center'>等待上传……</p></div></div>");
     $('#mylist').append(result);
     result = result.children().children();
 
@@ -41,7 +41,7 @@ function addToList(x, y, width, height, src_canvas) {
     });
     (result[1].children)[0].children[1].addEventListener('click', () => {
         let img_canvas = result[0].children[0];
-        let name = window.prompt("report...");
+        let name = window.prompt("识别为了错误的角色？请输入他/她正确的名称，将上传图片和您输入的标签信息。");
         if (name != null) {
             $.post("/report", {
                 data: img_canvas.toDataURL('image/png'),

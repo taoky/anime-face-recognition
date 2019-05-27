@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>动漫人物识别 Demo</title>
+    <title>动漫人物分类识别 Demo</title>
     <link href="/static/css/user.css" rel="stylesheet" type="text/css" />
     <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="/static/js/jquery.min.js"></script>
@@ -16,7 +16,7 @@
     <div class="container-fluid">
         <div class="px-3 py-5">
             <div>
-                <h1>动漫人物识别 Demo</h1>
+                <h1>动漫人物分类识别 Demo</h1>
                 <p id="status">
                     正在初始化 OpenCV……
                 </p>
@@ -29,25 +29,29 @@
                         <label class="custom-file-label" for="inputGroupFile01">选择文件！</label>
                     </div>
                 </div>
-                <div class="control"><button id="tryIt" class="btn btn-primary" disabled>自动识别</button></div>
+                <div class="control"><button id="tryIt" class="btn btn-primary" disabled>OpenCV 自动识别</button></div>
                 <p class="err" id="errorMessage"></p>
                 <canvas class="image_canvas" id="canvasInput" hidden></canvas>
             </div>
 
-            <br>
-            <div class="alert alert-primary" role="alert">
-                没有检测到？你可以手动框选加入。
-            </div>
-            <div class="canvas-box">
-
-            </div>
-
-            <input type="button" id="addToList" class="btn btn-primary" value="加入列表">
-            <input type="button" id="clearList" class="btn btn-warning" value="清空列表">
-
-            <input type="button" id="upload" class="btn btn-success" value="上传至服务器分析">
             <hr>
-            <div id="mylist"></div>
+            <div class="part2">
+                <div class="alert alert-primary" role="alert">
+                    「自动识别」没能框出正确的人像（选择区域太大/太小/识别错误）？你可以手动框选加入。
+                    <br>
+                    提示：包含更多特征的面部照片识别的准确率更高。
+                </div>
+                <div class="canvas-box">
+
+                </div>
+
+                <input type="button" id="addToList" class="btn btn-primary" value="加入列表">
+                <input type="button" id="clearList" class="btn btn-warning" value="清空列表">
+
+                <input type="button" id="upload" class="btn btn-success" value="上传至服务器分析">
+                <hr>
+                <div id="mylist"></div>
+            </div>
         </div>
     </div>
 
@@ -68,10 +72,15 @@
             let upload_list = document.getElementsByClassName("result_pic")
             console.log(upload_list);
             for (let i = 0; i < upload_list.length; i++) {
+                let resultText = upload_list[i].parentNode.nextElementSibling.nextElementSibling
+                if (resultText.innerText != "等待上传……") {
+                    continue;
+                } else {
+                    resultText.innerText = "请等待……";
+                }
                 $.post("/uploadForIdent", {
                     data: upload_list[i].toDataURL('image/png')
                 }, (data, status) => {
-                    let resultText = upload_list[i].parentNode.nextElementSibling.nextElementSibling
                     if (status == "success") {
                         resultText.innerText = data
                     } else {
