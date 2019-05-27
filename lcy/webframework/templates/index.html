@@ -58,6 +58,7 @@
     <script type="text/javascript">
         statusText = document.getElementById("status")
         resultText = document.getElementById("result")
+        tryIt = document.getElementById('tryIt');
 
         function test(base64) {
             //最终把此base64传给后端
@@ -92,7 +93,6 @@
         let utils = new Utils('errorMessage');
         utils.addFileInputHandler('fileInput', 'canvasInput');
 
-        let tryIt = document.getElementById('tryIt');
         tryIt.addEventListener('click', facedet);
 
         utils.loadOpenCv(() => {
