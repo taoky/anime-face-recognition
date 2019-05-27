@@ -35,3 +35,7 @@
     width: 100%;
     height: auto;
 }
+
+.align_middle {
+    text-align: center;
+}

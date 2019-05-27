@@ -25,7 +25,7 @@
                 <div class="input-group mb-3">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="fileInput"
-                            aria-describedby="inputGroupFileAddon01">
+                            aria-describedby="inputGroupFileAddon01" accept="image/*">
                         <label class="custom-file-label" for="inputGroupFile01">选择文件！</label>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
             </div>
 
             <hr>
-            <div class="part2">
+            <div class="part2" hidden>
                 <div class="alert alert-primary" role="alert">
                     「自动识别」没能框出正确的人像（选择区域太大/太小/识别错误）？你可以手动框选加入。
                     <br>
@@ -64,9 +64,13 @@
         tryIt = document.getElementById('tryIt');
         uploadButton = document.getElementById("upload");
         clearButton = document.getElementById("clearList");
+        inputFileArea = document.getElementById("fileInput")
 
         uploadButton.addEventListener('click', upload);
         clearButton.addEventListener('click', clearList);
+        inputFileArea.addEventListener('change', () => {
+            $(".part2").removeAttr('hidden');
+        })
 
         function upload() {
             let upload_list = document.getElementsByClassName("result_pic")
