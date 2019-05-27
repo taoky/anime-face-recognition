@@ -16,23 +16,29 @@ function facedet() {
         let face = faces.get(i);
         let width = face.width;
         let height = face.height;
-        // let roiGray = gray.roi(face);
-        // let roiSrc = src.roi(face);
-        // let point1 = new cv.Point(face.x, face.y);
-        // let point2 = new cv.Point(face.x + width, face.y + height);
         console.log(faces.get(i));
-        // cv.rectangle(src, point1, point2, [255, 0, 0, 255]);
 
-        var $result = $("<canvas class='result_pic' width='" + width + "' height='" + height + "'></canvas><button class='delete_button'>删除此项</button>");
-		$('body').append($result);
-		$result[0].getContext('2d').drawImage(src_canvas,
-			face.x, face.y, width, height,
-			0, 0, width, height
-        );
+        addToList(face.x, face.y, width, height, src_canvas)
         
-        // roiGray.delete(); roiSrc.delete();
     }
-    // cv.imshow('canvasOutput', src);
     src.delete(); gray.delete(); faceCascade.delete();
     faces.delete();
+}
+
+function addToList(x, y, width, height, src_canvas) {
+    var result = $("<canvas class='result_pic' width='" + width + "' height='" + height + 
+                    "'></canvas><button class='delete_button'>删除此项</button>");
+    $('#mylist').append(result);
+    console.log(result)
+    result[0].getContext('2d').drawImage(src_canvas,
+        x, y, width, height,
+        0, 0, width, height
+    );
+    result[1].addEventListener('click', (e) => {
+        let x = result[1];
+        console.log(x);
+        console.log(x.previousSibling);
+        x.previousSibling.remove();
+        x.remove();
+    })
 }

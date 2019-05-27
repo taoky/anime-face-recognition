@@ -32,8 +32,12 @@
 
     <input type="button" id="upload" value="上传至服务器分析">
 
+    <div id="mylist"></div>
+
     <p id="result"></p>
 
+    <script src="/static/js/utils.js" type="text/javascript"></script>
+    <script src="/static/js/user.js" type="text/javascript"></script>
     <script src="/static/js/zm-canvas-crop.js"></script>
 
     <script type="text/javascript">
@@ -67,8 +71,6 @@
             min_height: 10  //要剪裁图片的最小高度
         });
     </script>
-    <script src="/static/js/utils.js" type="text/javascript"></script>
-    <script src="/static/js/user.js" type="text/javascript"></script>
     
     <script type="text/javascript">
         let utils = new Utils('errorMessage');
