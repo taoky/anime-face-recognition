@@ -3,4 +3,9 @@
 
 # VSCode
 .vscode
-tky/test-model/output_graph.pb
+
+# it's too large
+output_graph.pb
+
+# Python
+*.pyc

@@ -27,7 +27,7 @@ function facedet() {
 
 function addToList(x, y, width, height, src_canvas) {
     var result = $("<canvas class='result_pic' width='" + width + "' height='" + height + 
-                    "'></canvas><button class='delete_button'>删除此项</button>");
+                    "'></canvas><button class='delete_button'>删除此项</button><p class='result'></p>");
     $('#mylist').append(result);
     console.log(result)
     result[0].getContext('2d').drawImage(src_canvas,

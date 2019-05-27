@@ -34,28 +34,35 @@
 
     <div id="mylist"></div>
 
-    <p id="result"></p>
+    <!-- <p id="result"></p> -->
 
     <script src="/static/js/utils.js" type="text/javascript"></script>
     <script src="/static/js/user.js" type="text/javascript"></script>
     <script src="/static/js/zm-canvas-crop.js"></script>
 
     <script type="text/javascript">
-        statusText = document.getElementById("status")
-        resultText = document.getElementById("result")
+        statusText = document.getElementById("status");
+        // resultText = document.getElementById("result");
         tryIt = document.getElementById('tryIt');
+        uploadButton = document.getElementById("upload");
 
-        function test(base64) {
-            //最终把此base64传给后端
-            $.post("/submitPic", {
-                data: base64
-            }, (data, status) => {
-                if (status == "success") {
-                    resultText.innerText = data
-                } else {
-                    resultText.innerText = "Server returns a HTTP error. Please try again later."
-                }
-            });
+        uploadButton.addEventListener('click', upload);
+
+        function upload() {
+            let upload_list = document.getElementsByClassName("result_pic")
+            console.log(upload_list);
+            for (let i = 0; i < upload_list.length; i++) {
+                $.post("/uploadForIdent", {
+                    data: upload_list[i].toDataURL('image/png')
+                }, (data, status) => {
+                    let resultText = upload_list[i].nextElementSibling.nextElementSibling
+                    if (status == "success") {
+                        resultText.innerText = data
+                    } else {
+                        resultText.innerText = "Server experiences an error. Please try again later."
+                    }
+                });
+            }
         }
 
         function saveCallBack(_) {
