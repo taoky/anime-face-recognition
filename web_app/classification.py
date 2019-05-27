@@ -1,6 +1,7 @@
 import numpy as np
 import tensorflow as tf
 
+
 def load_graph(model_file):
   graph = tf.Graph()
   graph_def = tf.GraphDef()
@@ -12,6 +13,9 @@ def load_graph(model_file):
 
   return graph
 
+model_file = \
+    "static/data/output_graph.pb"
+graph_model = load_graph(model_file)
 
 def read_tensor_from_image_file(file_name,
                                 input_height=299,
@@ -50,8 +54,7 @@ def load_labels(label_file):
   return label
 
 def web_api(file_name):
-  model_file = \
-    "static/data/output_graph.pb"
+  
   label_file = "static/data/output_labels.txt"
   input_height = 299
   input_width = 299
@@ -60,7 +63,6 @@ def web_api(file_name):
   input_layer = "Placeholder"
   output_layer = "final_result"
 
-  graph = load_graph(model_file)
   t = read_tensor_from_image_file(
       file_name,
       input_height=input_height,
@@ -70,10 +72,10 @@ def web_api(file_name):
 
   input_name = "import/" + input_layer
   output_name = "import/" + output_layer
-  input_operation = graph.get_operation_by_name(input_name)
-  output_operation = graph.get_operation_by_name(output_name)
+  input_operation = graph_model.get_operation_by_name(input_name)
+  output_operation = graph_model.get_operation_by_name(output_name)
 
-  with tf.Session(graph=graph) as sess:
+  with tf.Session(graph=graph_model) as sess:
     results = sess.run(output_operation.outputs[0], {
         input_operation.outputs[0]: t
     })
