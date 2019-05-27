@@ -86,5 +86,5 @@ def web_api(file_name):
   ret = ""
   for i in top_k:
     print(labels[i], results[i])
-    ret += str((labels[i], results[i]))
+    ret += str((labels[i], results[i])) + "\n"
   return ret

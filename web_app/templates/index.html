@@ -14,34 +14,41 @@
 
 <body>
     <div class="container-fluid">
-        <h1>动漫人物识别 Demo</h1>
-        <p id="status">
-            正在初始化 OpenCV……
-        </p>
-        <div>
+        <div class="px-3 py-5">
+            <div>
+                <h1>动漫人物识别 Demo</h1>
+                <p id="status">
+                    正在初始化 OpenCV……
+                </p>
+            </div>
+            <div>
                 <div class="input-group mb-3">
-                        <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="fileInput" aria-describedby="inputGroupFileAddon01">
-                          <label class="custom-file-label" for="inputGroupFile01">选择文件！</label>
-                        </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="fileInput"
+                            aria-describedby="inputGroupFileAddon01">
+                        <label class="custom-file-label" for="inputGroupFile01">选择文件！</label>
+                    </div>
                 </div>
-            <div class="control"><button id="tryIt" class="btn btn-primary" disabled>自动识别</button></div>
-            <p class="err" id="errorMessage"></p>
-            <canvas class="image_canvas" id="canvasInput" hidden></canvas>
+                <div class="control"><button id="tryIt" class="btn btn-primary" disabled>自动识别</button></div>
+                <p class="err" id="errorMessage"></p>
+                <canvas class="image_canvas" id="canvasInput" hidden></canvas>
+            </div>
+
+            <br>
+            <div class="alert alert-primary" role="alert">
+                没有检测到？你可以手动框选加入。
+            </div>
+            <div class="canvas-box">
+
+            </div>
+
+            <input type="button" id="addToList" class="btn btn-primary" value="加入列表">
+            <input type="button" id="clearList" class="btn btn-warning" value="清空列表">
+
+            <input type="button" id="upload" class="btn btn-success" value="上传至服务器分析">
+            <hr>
+            <div id="mylist"></div>
         </div>
-
-        <br>
-        <h2>没有检测到？你可以手动框选加入。</h2>
-        <div class="canvas-box">
-
-        </div>
-
-        <input type="button" id="addToList" class="btn btn-primary" value="加入列表">
-        <input type="button" id="clearList" class="btn btn-warning" value="清空列表">
-
-        <input type="button" id="upload" class="btn btn-success" value="上传至服务器分析">
-
-        <div id="mylist"></div>
     </div>
 
     <script src="/static/js/utils.js" type="text/javascript"></script>
@@ -64,7 +71,7 @@
                 $.post("/uploadForIdent", {
                     data: upload_list[i].toDataURL('image/png')
                 }, (data, status) => {
-                    let resultText = upload_list[i].nextElementSibling.nextElementSibling.nextElementSibling
+                    let resultText = upload_list[i].parentNode.nextElementSibling.nextElementSibling
                     if (status == "success") {
                         resultText.innerText = data
                     } else {

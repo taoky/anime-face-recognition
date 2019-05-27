@@ -26,25 +26,21 @@ function facedet() {
 }
 
 function addToList(x, y, width, height, src_canvas) {
-    var result = $("<canvas class='result_pic' width='" + width + "' height='" + height + 
-                    "'></canvas><button class='delete_button btn btn-danger'>删除此项</button><button class='report_button btn btn-info'>结果不对？</button><p class='result'></p>");
+    let result = $("<div class=\"container-fluid\"><div class='row'><div class='col-md-4'><canvas class='result_pic' width='" + width + "' height='" + height + 
+                    "'></canvas></div><div class='col-md-4 align-self-center'><div class='btn-group' role='group' aria-label='Basic example'><button class='delete_button btn btn-danger'>删除此项</button><button class='report_button btn btn-info'>结果不对？</button></div></div><p class='result col-md-4 align-self-center'></p></div></div>");
     $('#mylist').append(result);
-    console.log(result)
-    result[0].getContext('2d').drawImage(src_canvas,
+    result = result.children().children();
+
+    console.log(result);
+    (result[0].children)[0].getContext('2d').drawImage(src_canvas,
         x, y, width, height,
         0, 0, width, height
     );
-    result[1].addEventListener('click', () => {
-        let x = result[1];
-        console.log(x);
-        console.log(x.previousSibling);
-        x.previousSibling.remove();
-        x.nextSibling.remove();
-        x.nextSibling.remove();
-        x.remove();
+    (result[1].children)[0].children[0].addEventListener('click', () => {
+        result.remove()
     });
-    result[2].addEventListener('click', () => {
-        let img_canvas = result[0];
+    (result[1].children)[0].children[1].addEventListener('click', () => {
+        let img_canvas = result[0].children[0];
         let name = window.prompt("report...");
         if (name != null) {
             $.post("/report", {

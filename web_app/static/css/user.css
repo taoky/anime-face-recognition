@@ -31,6 +31,7 @@
     user-select: none
 }
 
-/* #image_canvas {
-    max-width: 800px;
-} */
+.result_pic {
+    width: 100%;
+    height: auto;
+}
