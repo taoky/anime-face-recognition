@@ -13,3 +13,9 @@ output_graph.pb
 # Test file of web_app
 web_app/ident/*
 web_app/user_report/*
+
+# PyCharm
+.idea/
+
+# Virtual environments
+venv/
