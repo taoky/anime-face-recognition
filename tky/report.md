@@ -91,25 +91,64 @@ Google 搜图可以帮助解决一部分的问题，但是——
 
 传统上来讲，OpenCV 使用预训练的 Haar Cascades 分类器检测物体（比如说人脸、人眼、猫咪，下面以人脸为例）。其预先拿一堆有人脸（positive）和没人脸（negative）的图片训练 cascade function。训练时使用了哈尔特征（Haar-like features），计算窗口中不同位置像素和的差，以差值做分类。此外，还使用了一些其他的算法，例如整合不同分类器的 Adaboost。[^opencv]
 
-对于人脸来说，这样做大部分时候没啥问题。
+对于人脸来说，预置的分类器大部分时候没啥问题。
 
 ![4](../report_imgs/4.png)
 
 *Lenna 图官方样例。*
 
-但根据以上的原理，我们可以猜到，这个分类器用在 ACG 人物上会发生什么。
+但根据以上的描述，我们可以猜到，这个分类器用在 ACG 人物上会发生什么。
 
 ![5](../report_imgs/5.png)
 
 *看起来不是很靠谱。*
 
-所以怎么办？OpenCV 文档里有一篇[训练自己的 Haar Cascades 分类器的指南](https://docs.opencv.org/3.4/dc/d88/tutorial_traincascade.html)。但这不代表我们要自己来，因为已经有人干过这样的事情了。2011 年，有人训练过了一个动漫人物分类器：[lbpcascade_animeface](https://github.com/nagadomi/lbpcascade_animeface)。直接拿过来用就行。
+所以怎么办？OpenCV 文档里有一篇[训练自己的 Haar Cascades 分类器的指南](https://docs.opencv.org/3.4/dc/d88/tutorial_traincascade.html)。但这不代表我们要自己来，因为已经有人干过这样的事情了。2011 年，[nagadomi](https://github.com/nagadomi)（他/她也是著名的动画风格图片超分辨率重建程序 [waifu2x](https://github.com/nagadomi/waifu2x) 的作者！）训练了一个动漫人物分类器：[lbpcascade_animeface](https://github.com/nagadomi/lbpcascade_animeface)。直接拿过来用就行。
 
 ![6](../report_imgs/6.png)
 
 *识别出来了。*
 
+##### `animeface-2009`
 
+这是另一个动画面部识别的方案（和上面那个还是同一个作者），链接在[此](https://github.com/nagadomi/animeface-2009)。它与 `lbpcascade_animeface.xml` 相比准确性更高，但同时也需要更多的内存资源。如果内存不足，对于过大的图片可能会出现错误。
+
+![7](../report_imgs/7.png)
+
+*左：`animeface-2009` 结果；右：`lbpcascade_animeface.xml` 结果。*
+
+我构建了一个 Dockerfile 文件，方便此程序的部署。
+
+最终的流程是：
+
+- `ffmpeg` 在视频中抽取图像并缩放。
+- `animeface-2009` 识别每张图中的脸部，生成「数据集」。
+  - 我们使用的参数为：`--threshold 0.7 --margin 0.3`
+
+#### 无聊的日常
+
+很遗憾，在这套流程走完之后，接下来就是机械性的打标签流程了。
+
+![8](../report_imgs/8.png)
+
+*把左边的图片中的 true positive 的部分正确地拖动到右边的文件夹里就行了。根据视频采样频率的不同，可能处理每一集的数据会有几十次到上百次的拖动。*
+
+这花费了我绝大多数的时间。实话讲我不想这么搞，但是没有找到很好的办法。拜托别人来做也很困难，因为这一项分类需要后验知识。
+
+#### 数据能不能再多一点？
+
+我之前考虑过从一些插画网站上用爬虫爬取一些图片来做处理。最终我尝试使用 [PixivUtil2](https://github.com/Nandaka/PixivUtil2) 来根据标签爬取 Pixiv 上对应的图片，然后扔给 `animeface-2009` 来处理。
+
+听起来是个不错的主意，但是：
+
+- 我没有会员，搜索的时候没有办法按照热门度排序，只能按照时间来排。而这样的后果就是，在搜索列表里我看到了一些……像是小学生绘画风格的……作品。
+- 就算在爬取的时候设置了收藏数的门槛，但是最后获得的结果依然画风各异，不太稳定。在 `animeface-2009` 处理完之后，有些我根本认不出来是谁。
+
+最后向收集的数据集中加入了少量这类的图片。
+
+#### 数据集总结
+
+最终的数据集合计 31 个分类，来自 6 部动画作品 + 2 个小表情包，总计 7106 张图片。因为配角~~戏份~~数据不够，只给主角做了分类。
 
 ---
 
