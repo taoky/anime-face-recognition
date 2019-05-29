@@ -29,7 +29,7 @@ def image_augmentation(file_name):
         # 使用下面的0个到4个之间的方法去增强图像。
         iaa.SomeOf((0, 4),
             [
-                #用高斯模糊，均值模糊，中值模糊中的一种增强。注意OneOf的用法
+                #用高斯模糊，均值模糊，中值模糊中的一种增强
                 iaa.OneOf([
                   	iaa.GaussianBlur((0, 3.0)),
                     iaa.AverageBlur(k=(2, 7)), # 核大小2~7之间，k=((5, 7), (1, 3))时，核高度5~7，宽度1~3
@@ -56,20 +56,16 @@ def image_augmentation(file_name):
         ],
          random_order=True # 随机的顺序把这些操作用在图像上
        )
-	images_aug = [seq.augment_image(img) for _ in range(64)]
+	images_aug = [seq.augment_image(img) for _ in range(64)]#一张图片通过数据增广多出来64张
 	for i in range(64):
-		dir_file=re.sub(r'\..*$', '', file_name)+'_'+str(i)
+		dir_file=re.sub(r'\..*$', '', file_name)+'_'+str(i)#提取图片后缀之前的名称，并在原名称后添加i表示是增广的第i张图片
 		cv2.imwrite(dir_file+'.png',images_aug[i])
-		#print(file_name+str(i))
-		#cv2.imwrite(file_name+str(i),images_aug[i])
 	
-
-
 	
-def read_image(image_dir):
+def read_image(image_dir):#该部分和retrain.py中获取地址的操作几乎一样，因此不在此注释
 	sub_dirs = sorted(x[0] for x in tf.gfile.Walk(image_dir))
 	is_root_dir=True
-	for sub_dir in sub_dirs:
+	for sub_dir in sub_dirs:#读取地址
 		if is_root_dir:
 			is_root_dir = False
 			continue
