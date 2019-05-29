@@ -26,7 +26,7 @@ CHECKPOINT_NAME = '/tmp/_retrain_checkpoint'
 FAKE_QUANT_OPS = ('FakeQuantWithMinMaxVars',
                   'FakeQuantWithMinMaxVarsPerChannel')
 
-#从文件列表读取图片并分成训练集，验证集，测试集
+#从文件列表读取图片并分成训练集，验证集，测试集，同时读取分类
 #返回参数：包含子文件入口的有序列表
 def create_image_lists(image_dir, testing_percentage, validation_percentage):
   if not tf.gfile.Exists(image_dir):
