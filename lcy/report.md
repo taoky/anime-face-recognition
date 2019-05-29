@@ -27,7 +27,7 @@ opencv 的源码可以直接在 github 上获取。
     <opencv_src_dir>/platforms/js/build_js.py <build_dir>
 
 需要注意的是我们需要 Python 和 cmake 。
-(这里是获得最终js的截图。)
+![](pic/3.PNG)
 
 3. 测试获得的 opencv.js 
 
@@ -72,7 +72,7 @@ function onOpenCvReady() {
 </html>
 ```
 修改对应的参数, 然后让浏览器本地跑起来, 欣喜的是我们一次便成功的运行了代码。
-(这里是代码成功跑起来的截图)
+![](pic/1.PNG)
     
 #### 这里是fjw需要补充的技术细节介绍前端js的具体实现等等等
 padding
@@ -91,6 +91,8 @@ flask主要文件为:
  - classification.py
  - static文件夹
  - templates 文件夹
+
+![](pic/2.PNG)
 
 ####  app.py
 这个文件为整个flask web app 的核心文件，主要用于处理用户输入的图像数据和返回处理数据，并且作为相应前端文件的分发者。
