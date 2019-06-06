@@ -59,7 +59,7 @@ def image_augmentation(file_name):
 	images_aug = [seq.augment_image(img) for _ in range(64)]#一张图片通过数据增广多出来64张
 	for i in range(64):
 		dir_file=re.sub(r'\..*$', '', file_name)+'_'+str(i)#提取图片后缀之前的名称，并在原名称后添加i表示是增广的第i张图片
-		cv2.imwrite(dir_file+'.png',images_aug[i])
+		cv2.imwrite(dir_file+os.path.splitext(file_name)[-1],images_aug[i])
 	
 	
 def read_image(image_dir):#该部分和retrain.py中获取地址的操作几乎一样，因此不在此注释
