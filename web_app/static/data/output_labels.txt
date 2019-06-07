@@ -1,23 +1,31 @@
-1 m kon tsumugi kotobuki
-10 m clannad nagisa furukawa
-11 m clannad kyou fujibayashi
-12 m clannad kotomi ichinose
-13 m clannad tomoyo sakagami
-14 m clannad fuko ibuki
-15 m clannad ushio okazaki
-2 m kon yui hirasawa
-24 m hyouka eru chitanda
-25 m hyouka hotaro oreki
-26 m hyouka satoshi fukube
-27 m hyouka mayaka ibara
-28 m little busters riki naoe
-29 m little busters rin natsume
-33 m little busters komari kamikita
-34 m little busters haruka saigusa
-35 m little busters kudryavka noumi
-36 m little busters yuiko kurugaya
-37 m little busters mio nishizono
-4 m kon ritsu tainaka
-7 m kon azusa nakano
-8 m kon mio akiyama
-9 m clannad tomoya okazaki
+1 f m kon tsumugi kotobuki
+10 f m clannad nagisa furukawa
+11 f m clannad kyou fujibayashi
+12 f m clannad kotomi ichinose
+13 f m clannad tomoyo sakagami
+14 f m clannad fuko ibuki
+15 f m clannad ushio okazaki
+2 f m kon yui hirasawa
+24 f m hyouka eru chitanda
+25 m m hyouka hotaro oreki
+26 m m hyouka satoshi fukube
+27 f m hyouka mayaka ibara
+28 m m little busters riki naoe
+29 f m little busters rin natsume
+33 f m little busters komari kamikita
+34 f m little busters haruka saigusa
+35 f m little busters kudryavka noumi
+36 f m little busters yuiko kurugaya
+37 f m little busters mio nishizono
+38 f m planetarian yumemi hoshino
+39 f m is the order a rabbit cocoa hoto
+4 f m kon ritsu tainaka
+40 f m is the order a rabbit chino kafu
+41 f m is the order a rabbit rize tedeza
+42 f m is the order a rabbit chiya ujimatsu
+43 f m is the order a rabbit syaro kirima
+44 m u stickers doudou
+45 f u stickers menhera
+7 f m kon azusa nakano
+8 f m kon mio akiyama
+9 m m clannad tomoya okazaki
