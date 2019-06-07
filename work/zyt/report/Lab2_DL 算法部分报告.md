@@ -72,8 +72,8 @@
 -  
 
   <figure class="half">
-      <img src="imgs/result7.png" width="250">
-      <img src="imgs/result6.png" width="500">
+      <img src="imgs/result7.PNG" width="250">
+      <img src="imgs/result6.PNG" width="500">
   </figure>
 
   *<span id = "3">左：</span>训练10000步的结果 右边：训练4000步的结果*
@@ -86,7 +86,7 @@
 
 - 将输入图片传入训练好的模型(**此处附训练好的模型的地址**)，根据模型的输出值(31维向量)来判断该图片是哪一个动漫人物，并输出概率前五。
 
--  <img src="imgs/result8.png">
+-  <img src="imgs/result8.PNG">
 
   *对一张测试图片进行判断*
 
