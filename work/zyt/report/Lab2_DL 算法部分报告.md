@@ -69,10 +69,8 @@
 
 - 但最后这样数据增广后的效果很差，虽然没有明显的过拟合现象了，但在训练10000步后依然准确率只有80%多，我们认为可能是这样数据增广其实并不太适合动漫人物，因为动漫人物的脸形非常重要，所以扭曲可能就造成不好的结果。
 
--  
-
-  <figure class="half">
-      <img src="imgs/result7.PNG" width="240">
+-  <figure class="half">
+      <img src="imgs/result7.PNG" width="250">
       <img src="imgs/result6.PNG" width="500">
   </figure>
 
