@@ -18,6 +18,8 @@ Python &amp; Deep Learning 101 Assignment #2
 
 ![1](report_imgs/1.gif)
 
+[动图链接](https://raw.githubusercontent.com/taoky/anime-face-recognition/master/report_imgs/1.gif)
+
 *就是这张，原图没有找到，自己花了点时间重新做了一份。*
 
 然后呢，我就隐隐约约有一种「好像很熟悉但是忘了是在哪儿看到的了」这种感觉，~~都是京都脸害的，~~ 之后就想——要不就搞一个学习分类 ACG 人物的项目吧，告诉我们图片中出现的角色到底是谁。图像分类应该是比较成熟的了，对于我们这四条以前从来没玩过深度学习的咸鱼来说（看起来）还是比较合适的。
@@ -101,7 +103,7 @@ Google 搜图可以帮助解决一部分的问题，但是——
 
 ##### OpenCV 方案：`lbpcascade_animeface.xml`
 
-传统上来讲，OpenCV 使用预训练的 Haar Cascades 分类器检测物体（比如说人脸、人眼、猫咪，下面以人脸为例）。其预先拿一堆有人脸（positive）和没人脸（negative）的图片训练 cascade function。训练时使用了哈尔特征（Haar-like features），计算窗口中不同位置像素和的差，以差值做分类。此外，还使用了一些其他的算法，例如整合不同分类器的 Adaboost。[见此链接](https://docs.opencv.org/3.4/d2/d99/tutorial_js_face_detection.html)。
+传统上来讲，OpenCV 使用预训练的 Haar Cascades 分类器检测物体（比如说人脸、人眼、猫咪，下面以人脸为例）。其预先拿一堆有人脸（positive）和没人脸（negative）的图片训练 cascade function。训练时使用了哈尔特征（Haar-like features），计算窗口中不同位置像素和的差，以差值做分类。此外，还使用了一些其他的算法，例如整合不同分类器的 Adaboost。[详细信息见此文档](https://docs.opencv.org/3.4/d2/d99/tutorial_js_face_detection.html)。
 
 对于人脸来说，预置的分类器大部分时候没啥问题。
 
@@ -170,6 +172,8 @@ Google 搜图可以帮助解决一部分的问题，但是——
 分享密码：0984
 ```
 
+关于此数据集更详细的信息，参见[此链接](https://github.com/taoky/anime-face-recognition/blob/master/work/tky/README.md)。
+
 ## 算法原理
 
 *written by zyt*
@@ -225,7 +229,7 @@ Google 搜图可以帮助解决一部分的问题，但是——
 
   *数据增广的效果*
 
-- *数据增广后的图片共 7106\*65 张*
+  数据增广后的图片共 7106\*65 张。
 
 - 但最后这样数据增广后的效果很差，虽然没有明显的过拟合现象了，但在训练 10000 步后依然准确率只有 80% 多，我们认为可能是这样数据增广其实并不太适合动漫人物，因为动漫人物的脸形非常重要，所以扭曲可能就造成不好的结果。
 
@@ -233,7 +237,7 @@ Google 搜图可以帮助解决一部分的问题，但是——
 
   *训练 10000 步的结果*
 
--  ![result6](report_imgs/result6.png)
+  ![result6](report_imgs/result6.png)
 
   *训练 4000 步的结果*
 
@@ -251,6 +255,8 @@ Google 搜图可以帮助解决一部分的问题，但是——
     分享地址：http://rec.ustc.edu.cn/share/a8386b80-88ff-11e9-a9eb-7776bafc0f5b
     分享密码：4430
     ```
+    
+  - 标签文件 `output_label.txt` 位于 `web_app/static/data` 下，[下载](https://raw.githubusercontent.com/taoky/anime-face-recognition/master/web_app/static/data/output_labels.txt)。
 
 -  ![result8](report_imgs/result8.png)
 
