@@ -172,11 +172,19 @@ Google 搜图可以帮助解决一部分的问题，但是——
 分享密码：0984
 ```
 
+或
+
+```
+https://mailustceducn-my.sharepoint.com/:u:/g/personal/taoky_mail_ustc_edu_cn/EbPLQwXOKWZNsL2bQ5eXETwB458HdS3_u7GBtLEEgWmxHg?e=9ffLLH
+```
+
 关于此数据集更详细的信息，参见[此链接](https://github.com/taoky/anime-face-recognition/blob/master/work/tky/README.md)。
 
 ## 算法原理
 
 *written by zyt*
+
+有关训练网络等代码在 https://github.com/taoky/anime-face-recognition/tree/master/work/zyt 中。
 
 ### 训练模型
 
@@ -270,7 +278,7 @@ Google 搜图可以帮助解决一部分的问题，但是——
 - 在数据增广的时候我们将 step 从 4000 增加到了 10000，虽然最后结果还是不理想。之前训练时并没有增加 step，因为从 tensorboard 的可视化结果来看，交叉熵和准确率都已经近乎不变了。
 - 本次实验在最初将图片传给 Inception-v3 得到的计算结果缓存到电脑，这样在之后训练过程中不需要重复计算。
 - 本次实验采用随机梯度下降法。
-- 我们将数据集扩大，将种类减少，使得训练结果更好(详见数据处理 Taoky 部分)；后期将数据增广，但并没有得到很好的效果。
+- 我们将数据集扩大，将种类减少，使得训练结果更好（详见数据处理 tky 部分）；后期将数据增广，但并没有得到很好的效果。
 - 最终我们采用 7000 余张图片训练出来的结果。
 
 ### 关于「网站」的前后端设计
