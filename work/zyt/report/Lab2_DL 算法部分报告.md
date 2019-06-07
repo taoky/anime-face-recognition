@@ -72,7 +72,7 @@
 -  
 
   <figure class="half">
-      <img src="imgs/result7.PNG" width="250">
+      <img src="imgs/result7.PNG" width="240">
       <img src="imgs/result6.PNG" width="500">
   </figure>
 
